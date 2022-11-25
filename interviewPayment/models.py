@@ -5,9 +5,7 @@ from django.db import models
 
 class Currency(models.Model):
 
-    code = models.CharField(max_length=3)
-
-    amount = models.FloatField()
+    code = models.CharField(max_length=3, unique=True)
 
 
 class Item(models.Model):
@@ -16,8 +14,18 @@ class Item(models.Model):
 
     description = models.TextField()
 
+
+class Amount(models.Model):
+
+    amount = models.FloatField()
+
     currency = models.ForeignKey(
         Currency,
+        on_delete=models.RESTRICT
+    )
+
+    item = models.ForeignKey(
+        Item,
         on_delete=models.RESTRICT
     )
 
@@ -25,4 +33,10 @@ class Item(models.Model):
 class Order(models.Model):
 
     items = models.ManyToManyField(Item)
+
+    currency = models.ForeignKey(
+        Currency,
+        on_delete=models.RESTRICT
+    )
+
 

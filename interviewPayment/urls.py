@@ -6,6 +6,4 @@ app_name = 'interviewPayment'
 
 urlpatterns = [
     path('items/', ListItems.as_view(), name='list_items'),
-
-    path('api/', include('interviewPayment.api.urls'))
 ]

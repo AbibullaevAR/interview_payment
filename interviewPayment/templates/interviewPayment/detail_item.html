@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Buy {{ item.name }}</title>
+  </head>
+  <body>
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+    {% if item in order_items %}
+        Item already in order
+    {% else %}
+        <button id="add-order-button">Add in order</button>
+    <script type="text/javascript">
+          var addOrderButton = document.getElementById('add-order-button')
+
+          addOrderButton.addEventListener('click', function () {
+              fetch("{% url 'interviewPayment:add_in_order' pk=item.pk %}", {method: 'GET'}).
+                  then((data) => window.open(data.url))
+
+      })
+    </script>
+    {% endif %}
+  </body>
+</html>

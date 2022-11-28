@@ -4,6 +4,10 @@ from django.db.models import CheckConstraint, Q
 
 # Create your models here.
 
+class Currency (models.Model):
+
+    currency_code = models.CharField(max_length=3, unique=True)
+
 
 class Item(models.Model):
 
@@ -11,7 +15,7 @@ class Item(models.Model):
 
     description = models.TextField()
 
-    currency_code = models.CharField(max_length=3, unique=True)
+    price = models.PositiveIntegerField()
 
 
 class Discount (models.Model):
@@ -37,4 +41,4 @@ class Order(models.Model):
 
     discount = models.ForeignKey(Discount, on_delete=models.RESTRICT, blank=True, null=True)
 
-
+    currency = models.ForeignKey(Currency, on_delete=models.RESTRICT, blank=True, null=True)

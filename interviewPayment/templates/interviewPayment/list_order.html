@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+    <div class="order__container">
+        {% if order_items %}
+            <div class="order__container order__container__items">
+                {% for item in order_items %}
+                    <div class="order__container order__container__item">
+                        <div class="order__items_name">
+                            Name: {{ item.name }}
+                        </div>
+                        <div class="order__items_description">
+                            Description: {{ item.description }}
+                        </div>
+                        <div class="order__items_price">
+                            Price: {{ item.price }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <form action="." method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Go to payment">
+            </form>
+        {% else %}
+            Order empty get <a href="{% url 'interviewPayment:list_items' %}">items.</a>
+        {% endif %}
+    </div>
+</body>
+<style>
+    .order__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: space-between;
+    }
+    .order__container__item {
+        margin: 10px;
+    }
+</style>
+</html>

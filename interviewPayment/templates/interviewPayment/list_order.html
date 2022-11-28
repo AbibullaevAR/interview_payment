@@ -28,8 +28,10 @@
                 <input type="submit" value="Go to payment">
             </form>
         {% else %}
-            Order empty get <a href="{% url 'interviewPayment:list_items' %}">items.</a>
+            Order empty.
         {% endif %}
+
+        <a href="{% url 'interviewPayment:list_items' %}">Go to items.</a>
     </div>
 </body>
 <style>

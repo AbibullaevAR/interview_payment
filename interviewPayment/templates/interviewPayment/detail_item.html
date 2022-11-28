@@ -15,7 +15,7 @@
 
           addOrderButton.addEventListener('click', function () {
               fetch("{% url 'interviewPayment:add_in_order' pk=item.pk %}", {method: 'GET'}).
-                  then((data) => window.open(data.url))
+                  then((data) => {window.location.href = data.url})
 
       })
     </script>

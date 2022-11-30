@@ -1,0 +1,28 @@
+    .items__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: space-between;
+    }
+    .items__container-box {
+        text-align: center;
+        width: 100px;
+        height: 50px;
+        background-color: #7affa3;
+        margin: 10px;
+    }
+    .items__container-box a {
+        text-align: center;
+    }
+    .items__container a {
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .items__container__bucket {
+        text-align: center;
+        width: 100px;
+        height: 50px;
+        background-color: #7af4ff;
+        margin: 10px;
+    }

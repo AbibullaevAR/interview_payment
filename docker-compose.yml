@@ -3,7 +3,14 @@ version: '3.8'
 services:
   web:
     build: ./
-    command: gunicorn interview_payment.wsgi:application --bind 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py makemigrations interviewPayment &&
+             python manage.py migrate &&
+             python manage.py collectstatic --no-input --clear &&
+             python manage.py base_init_data_command &&
+             gunicorn interview_payment.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume:/home/app/web/staticfiles
     env_file:
       - ./.env.prod
     depends_on:
@@ -11,6 +18,8 @@ services:
 
   db:
     image: postgres:13.0-alpine
+    ports:
+      - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
@@ -21,6 +30,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    volumes:
+      - static_volume:/home/app/web/staticfiles
     depends_on:
       - web
 
@@ -28,3 +39,4 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:

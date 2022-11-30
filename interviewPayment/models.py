@@ -8,6 +8,9 @@ class Currency (models.Model):
 
     currency_code = models.CharField(max_length=3, unique=True)
 
+    def __str__(self):
+        return self.currency_code
+
 
 class Item(models.Model):
 
@@ -16,6 +19,9 @@ class Item(models.Model):
     description = models.TextField()
 
     price = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Discount (models.Model):
@@ -33,6 +39,9 @@ class Discount (models.Model):
                 check=Q(percent_off__gte=1.0) & Q(percent_off__lte=100.0),
                 name='percent_off_range'),
         )
+
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):
